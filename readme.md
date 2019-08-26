@@ -1,6 +1,14 @@
 # Tindev
 
-**TODO: Colocar Print**
+## Sobre
+
+- TODO: _________
+
+## Prints
+
+![](imagens_readme/login_1.png)
+![](imagens_readme/login_2.png)
+![](imagens_readme/home.png)
 
 # Features Implementadas
 

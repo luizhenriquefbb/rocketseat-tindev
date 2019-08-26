@@ -11,7 +11,7 @@ routes.get('/', (req, res) => {
 } )
 
 // Dev routes
-routes.post('/new_dev', DevController.store );
+routes.post('/devs', DevController.store );
 routes.get('/devs', DevController.index );
 
 
