@@ -1,1 +1,10 @@
 */node_modules
+
+
+# front end ===========
+# production
+frontend/build
+
+
+
+# native
