@@ -2,17 +2,24 @@
 
 ## Sobre
 
-- TODO: _________
+- Este app é um aaplicação full stack desenvolvida em react/reactNative e node e funciona como um espécie de "Tinder" para desenvoldedores.
+- Ela se comunica com a api do github e basta informar o userName usado nesta plataforma para poder logar no tindev. (informacoes como BIO, avatar e nome sao obtidas automaticamente).
+- Dando os devidos creditos, foi desenvolvida durante a omnistack 8 promovida pela RocketSeat (**TODO: colocar link**)
 
 ## Prints
 
 ![](imagens_readme/login_1.png)
-![](imagens_readme/login_2.png)
+<!-- ![](imagens_readme/login_2.png) -->
 ![](imagens_readme/home.png)
 
 # Features Implementadas
 
-- TODO: _____
+- Fullstack completa: conta tanto com backend, como com frontend, mobile e banco de dados remoto (mongoDB)
+- Comunicação com API de terceiros (github)
+- **TODO: match em tempo real com socket**
+
+
+# Instalacao
 
 ## Front e Back
 
@@ -58,7 +65,7 @@ node src/index.js
 
 ## FrontEnd
 
-- [react](https://reactjs.org/docs/getting-started.html)
+<!-- - [react](https://reactjs.org/docs/getting-started.html) -->
 
 - Basta ir para o diretório do frontend
 ```sh
@@ -75,7 +82,7 @@ Rodar no browser
 yarn start
 ```
 
-## Mobile
+<!-- ## Mobile
 
 Instalar as dependencias
 
@@ -92,6 +99,10 @@ react-native run-android
 ou
 
 react-native run-ios
-```
+``` -->
 
+# TODO:
 
+- Readme versao ingles
+- aplicacao mobile
+- match

@@ -19,7 +19,7 @@ export default class Home extends Component {
 
     }
 
-    componentDidMount(){
+    loadUsers(){
         var self = this;
         async function loadUsers() {
                 console.log('this.state', self.state);
@@ -31,13 +31,29 @@ export default class Home extends Component {
                 console.log('this.state', self.state);
             }
         loadUsers();
+
     }
 
-    handleLike(){
-        alert("In development");
+    componentDidMount(){
+        this.loadUsers();
     }
-    handleDislike(){
-        alert("In development");
+
+    handleLike(otherDevId){
+        var self = this;
+        async function _like() {
+            await api.post(`/like/${otherDevId}`, null, { headers: { user: self.props.match.params.id } });
+            self.loadUsers();
+        }
+
+        _like();
+    }
+    handleDislike(otherDevId){
+        var self = this;
+        async function _dislike() {
+            await api.post(`/like/${otherDevId}`, null, { headers: { user: self.props.match.params.id } });
+            self.loadUsers();
+        }
+        _dislike();
     }
 
 
@@ -49,27 +65,35 @@ export default class Home extends Component {
                     <img src={logo} alt="Logo"/>
                 </Link>
 
-                <ul>
-                    {this.state.otherDevs.map((dev) => {
-                        return (
-                            <li key={dev._id}>
-                                <img src={dev.avatar} alt="dev_image" />
-                                <footer>
-                                    <strong>{dev.name}</strong>
-                                    <p>{dev.bio}</p>
-                                </footer>
-                                <div className="buttons">
-                                    <button type="button" className="like" onClick={this.handleLike}>
-                                        <img src={like} alt="" />
-                                    </button>
-                                    <button type="button" className="dislike" onClick={this.handleDislike}>
-                                        <img src={dislike} alt="" />
-                                    </button>
-                                </div>
-                            </li>)
-                    })}
+                {
+                    (this.state.otherDevs.length > 0) ?
+                    (<ul>
+                        {this.state.otherDevs.map((dev) => {
+                            return (
+                                <li key={dev._id}>
+                                    <img src={dev.avatar} alt="dev_image" />
+                                    <footer>
+                                        <strong>{dev.name}</strong>
+                                        <p>{dev.bio}</p>
+                                    </footer>
+                                    <div className="buttons">
+                                        <button type="button" className="like" onClick={() => this.handleLike(dev._id)}>
+                                            <img src={like} alt="" />
+                                        </button>
+                                        <button type="button" className="dislike" onClick={() => this.handleDislike(dev._id)}>
+                                            <img src={dislike} alt="" />
+                                        </button>
+                                    </div>
+                                </li>)
+                        })}
 
-                </ul>
+                    </ul>)
+
+                    :
+                    ( <div className="empty">Acabou os usuarios</div> )
+
+                }
+
             </div>
         );
     }
