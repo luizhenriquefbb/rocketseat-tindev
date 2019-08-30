@@ -24,7 +24,17 @@ module.exports = {
 
         // check for match
         if (targetDev.likes.includes(user)){
-            console.log('>> TODO: handle match');
+            const receiving_id_socket = req.connectedUsersHandler.getSocketIdByUserId(receiving_id);
+            const user_socket = req.connectedUsersHandler.getSocketIdByUserId(user);
+
+            // we should save this match to send a notification to the user if he is offline at the moment.
+            // for now he only will receive the match if he is online
+            if (receiving_id_socket) {
+                req.io.to(receiving_id_socket).emit("match", { other_dev: loggedDev });
+            }
+            if (user_socket) {
+                req.io.to(user_socket).emit("match", { other_dev: targetDev });
+            }
         }
 
 

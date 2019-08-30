@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
+import io from 'socket.io-client';
+
 import '../css/Home.css';
-import api from "../services/api"
+
+import api from "../services/api";
+import CONSTANTES from '../constantes';
 
 import logo from "../assets/logo.svg";
 import like from "../assets/like.svg";
 import dislike from "../assets/dislike.svg";
+import Match from '../components/Match';
 
 export default class Home extends Component {
 
@@ -15,20 +20,24 @@ export default class Home extends Component {
         this.state = {
             user_id : this.props.match.params.id,
             otherDevs : [],
+            match : null,
         }
+
+        this.socket = io(CONSTANTES.BASE_URL, {
+            query: {
+                dev_id : this.props.match.params.id
+            }
+        });
+        this.configureSocketListeners();
+
 
     }
 
     loadUsers(){
         var self = this;
         async function loadUsers() {
-                console.log('this.state', self.state);
                 const response =  await api.get("/devs", {headers : {user : self.state.user_id}});
-
-                console.log('response', response);
-
                 self.setState({otherDevs : response.data.users});
-                console.log('this.state', self.state);
             }
         loadUsers();
 
@@ -47,6 +56,7 @@ export default class Home extends Component {
 
         _like();
     }
+
     handleDislike(otherDevId){
         var self = this;
         async function _dislike() {
@@ -54,6 +64,17 @@ export default class Home extends Component {
             self.loadUsers();
         }
         _dislike();
+    }
+
+    configureSocketListeners(){
+        this.socket.on('match', (response) => {
+            this.setState({match : response.other_dev});
+
+        })
+    }
+
+    clearMatch(){
+        this.setState({ match: null });
     }
 
 
@@ -64,6 +85,12 @@ export default class Home extends Component {
                 <Link to="/">
                     <img src={logo} alt="Logo"/>
                 </Link>
+
+
+                {
+                    <Match match={this.state.match} clearMatch={() => this.clearMatch()}></Match>
+                }
+
 
                 {
                     (this.state.otherDevs.length > 0) ?
