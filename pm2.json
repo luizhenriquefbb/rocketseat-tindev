@@ -1,0 +1,14 @@
+{
+    "apps": [
+        {
+            "name": "tindev-backend",
+            "cwd": "./backend",
+            "script": "yarn execute"
+        },
+        {
+            "name": "tindev-frontend",
+            "cwd": "./frontend",
+            "script": "yarn start"
+        }
+    ]
+}

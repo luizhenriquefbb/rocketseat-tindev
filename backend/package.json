@@ -5,7 +5,8 @@
   "author": "luizhenrique",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "execute": "node src/index.js"
   },
   "devDependencies": {
     "eslint": "^6.2.2",

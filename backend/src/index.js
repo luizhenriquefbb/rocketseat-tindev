@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
+const consts = require('./config/consts');
+
 // create a server
 const app = express();
 const server = require('http').Server(app);
@@ -37,4 +39,4 @@ app.use(express.json());
 // import routes
 app.use(require('./routes'));
 
-server.listen(3333);
+server.listen(consts.PORT);
